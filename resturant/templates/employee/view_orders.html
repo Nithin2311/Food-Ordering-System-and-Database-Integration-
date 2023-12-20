@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% set title = "Orders" %}
+
+{% block style %}
+    <style>
+        table{
+            width: 100%;
+            text-align: left;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>All Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Order Number</th>
+                    <th>Order Cost</th>
+                    <th>Time Placed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in placed_orders %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ order.order_number }}</td>
+                        <td>{{ order.order_cost }}$</td>
+                        <td>{{ order.time_placed }}</td>
+                        <td>
+                            <a href="{{ url_for('employee.pick_order', order_number=order.order_number) }}">PICK ORDER</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

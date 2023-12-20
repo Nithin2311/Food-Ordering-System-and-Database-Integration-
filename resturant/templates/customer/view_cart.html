@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% set title = "CART" %}
+
+{% block style %}
+    <style>
+    .item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid lightgrey;
+        }
+
+        .item__props{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price{
+            background-color: lightslategrey;
+            padding: 5px 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 100px;
+        }
+
+        .quantity{
+            background-color: lightskyblue;
+            padding: 5px 20px;
+            color: #0064a2;
+            font-weight: bold;
+            border-radius: 100px;
+        }
+
+        .item__props a{
+            padding: 5px 20px;
+            background-color: lightgrey;
+            border-radius: 100px;
+        }
+
+        .confirm-order{
+            background-color: #0064a2;
+            padding: 10px 20px;
+            margin-top: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>Your Cart</h2>
+        {% if cart_items %}
+            {% for item in cart_items %}
+                <div class="item">
+                    <div class="item__name">
+                        {{ item.name }}
+                    </div>
+                    <div class="item__props">
+                        <label class="quantity">x{{ cart_item_quantity[item.itemID] }}</label>
+                        <label class="price">{{ item.price * cart_item_quantity[item.itemID] }} $</label>
+                        <a href="{{ url_for('customer.remove_from_cart') }}?item_id={{ item.itemID }}">REMOVE</a>
+                    </div>
+                </div>
+            {% endfor %}
+            <a class="confirm-order" href="{{ url_for("customer.confirm_order") }}">Confirm Order</a>
+        {% else %}
+            <span>No Items Added</span>
+        {% endif %}
+
+    </div>
+{% endblock %}

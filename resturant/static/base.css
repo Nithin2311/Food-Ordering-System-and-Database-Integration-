@@ -1,0 +1,36 @@
+*{
+    font-family: Arial;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    margin: 0;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 20px;
+    background-color: black;
+    color: white;
+}
+
+.nav-items{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-items a{
+    color: white;
+}
+
+.content{
+    margin-inline: 10%;
+}

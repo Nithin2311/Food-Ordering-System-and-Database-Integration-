@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} | {{ APPLICATION_NAME.capitalize() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">
+            <h2>{{ APPLICATION_NAME.capitalize() }}</h2>
+        </div>
+        <div class="nav-items">
+            {% if 'username' in session %}
+                <a href="{{ url_for('customer.view_menu') }}">MENU</a>
+                <a href="{{ url_for('customer.view_cart') }}">CART</a>
+                <a href="{{ url_for('customer.view_order') }}">ORDER</a>
+            {% elif 'empID' in session %}
+                <a href="{{ url_for('employee.view_orders') }}">ALL ORDERS</a>
+                <a href="{{ url_for('employee.view_pick_order') }}">ORDERS</a>
+                <a href="{{ url_for('employee.view_items') }}">ITEMS</a>
+            {% endif %}
+            <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
+        </div>
+    </nav>
+
+    <div class="center">
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <span>{{ message }}</span>
+            {% endfor %}
+        {% endwith %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

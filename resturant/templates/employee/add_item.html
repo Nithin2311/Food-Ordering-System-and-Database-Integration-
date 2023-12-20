@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% set title = "Add Item" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="content center">
+        <h2>Add New Item</h2>
+        <form action="{{ url_for("employee.add_item") }}" method="post">
+            <div class="form_input">
+                <label>Item Name</label>
+                <input type="text" name="item_name" required>
+            </div>
+            <div class="form_input">
+                <label>Available Quantity</label>
+                <input type="number" name="item_quantity" required>
+            </div>
+            <div class="form_input">
+                <label>Price</label>
+                <input type="number" name="item_price" required>
+            </div>
+            <div class="form_input">
+                <label>Type</label>
+                <select name="item_type">
+                    <option value="">-- Choose Item Type --</option>
+                    {% for type in ITEM_TYPES %}
+                        <option value="{{ type }}">{{ type.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form_submit">
+                <input type="submit" value="Add">
+            </div>
+        </form>
+    </div>
+{% endblock %}

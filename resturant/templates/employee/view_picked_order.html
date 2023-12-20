@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% set title = 'PICKED ORDER' %}
+
+{% block style %}
+    <style>
+
+        .order{
+            background-color: lightgrey;
+            padding: 10px;
+        }
+
+        table{
+            width: 100%;
+            text-align: left;
+        }
+
+        .order__details{
+            margin-bottom: 10px;
+        }
+
+        span{
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>Pick Order</h2>
+        {% for order in picked_orders %}
+            <div class="order">
+                <a style="float: right" href="{{ url_for("employee.mark_as_complete", order_number=order.order_number) }}">MARK AS COMPLETE</a>
+                <div class="order__details">
+                    <span><b>ORDER NUMBER:</b> #{{ order.order_number }}</span>
+                    <span><b>TIME PLACED:</b> {{ order.time_placed.strftime("%d-%b-%y") }}</span>
+                    <span><b>TOTAL PRICE:</b> {{ order.order_cost }}$</span>
+                    <span class="order_status"><b>STATUS:</b> {{ order.order_status }}</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Item Quantity</th>
+                            <th>Item Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>X{{ item_quantity[order.order_number][item.itemID] }}</td>
+                                <td>{{ item.price }}$</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

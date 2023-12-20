@@ -1,0 +1,30 @@
+<html lang="en">
+    <head>
+        <title>Employee Login</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+    </head>
+    <body>
+        <div class="center">
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <span>{{ message }}</span>
+                {% endfor %}
+            {% endwith %}
+            <h2>Employee Login</h2>
+            <form method="post" action="{{ url_for("auth.employee_login") }}">
+                <div class="form_input">
+                    <label>Employee ID</label>
+                    <input type="text" name="empID" required>
+                </div>
+                <div class="form_input">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <a href="{{ url_for('auth.login') }}">Customer Login</a>
+                <div class="form_submit">
+                    <input type="submit" value="LOGIN">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

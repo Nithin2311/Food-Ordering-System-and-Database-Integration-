@@ -1,0 +1,26 @@
+*{
+    font-family: Arial;
+    box-sizing: border-box;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label{
+    display: block;
+}
+
+input, select{
+    width: 100%;
+    padding: 10px;
+}

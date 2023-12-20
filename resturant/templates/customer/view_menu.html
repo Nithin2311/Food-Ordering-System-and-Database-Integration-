@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% set title = "MENU" %}
+
+{% block style %}
+    <style>
+        .item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid lightgrey;
+        }
+
+        .item__props{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price{
+            background-color: lightslategrey;
+            padding: 5px 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 100px;
+        }
+
+        .quantity{
+            background-color: lightskyblue;
+            padding: 5px 20px;
+            color: #0064a2;
+            font-weight: bold;
+            border-radius: 100px;
+        }
+
+        .item__props a{
+            padding: 5px 20px;
+            background-color: lightgrey;
+            border-radius: 100px;
+        }
+
+        .menu{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .menu > div{
+            flex: 1 0 300px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>MENU</h2>
+        <div class="menu">
+            <div>
+                <h3>BURGERS</h3>
+                {% for item in menu_burgers %}
+                    <div class="item">
+                        <div class="item__name">
+                            {{ item.name }}
+                        </div>
+                        <div class="item__props">
+                            <label class="quantity">{{ item.quantity }} Pieces</label>
+                            <label class="price">{{ item.price }} $</label>
+                            <a href="{{ url_for('customer.add_to_cart') }}?item_id={{ item.itemID }}">Add</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <h3>FRIES</h3>
+                {% for item in menu_fries %}
+                    <div class="item">
+                        <div class="item__name">
+                            {{ item.name }}
+                        </div>
+                        <div class="item__props">
+                            <label class="quantity">{{ item.quantity }} Pieces</label>
+                            <label class="price">{{ item.price }} $</label>
+                            <a href="{{ url_for('customer.add_to_cart') }}?item_id={{ item.itemID }}">Add</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <h3>DRINKS</h3>
+                {% for item in menu_drinks %}
+                    <div class="item">
+                        <div class="item__name">
+                            {{ item.name }}
+                        </div>
+                        <div class="item__props">
+                            <label class="quantity">{{ item.quantity }} Pieces</label>
+                            <label class="price">{{ item.price }} $</label>
+                            <a href="{{ url_for('customer.add_to_cart') }}?item_id={{ item.itemID }}">Add</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

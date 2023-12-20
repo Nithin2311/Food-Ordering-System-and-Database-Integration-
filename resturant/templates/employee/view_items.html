@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% set title = "Items" %}
+
+{% block style %}
+    <style>
+        .new-item-button{
+            padding: 10px;
+            background-color: lightgrey;
+            float: right;
+        }
+
+        table{
+            width: 100%;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even){
+            background-color: lightgrey;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <h2>ALL ITEMS</h2>
+        <a class="new-item-button" href="{{ url_for('employee.add_item') }}">ADD NEW ITEM</a>
+        <table cellpadding="5px" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price ($)</th>
+                    <th>Quantity (Pcs)</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in all_items %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.type }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
